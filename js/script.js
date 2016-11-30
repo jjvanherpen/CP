@@ -217,4 +217,6 @@ function initialize() {
 
         }
     }
+
+    newBoard();
 }
