@@ -132,12 +132,13 @@ function Game(data) {
         levels[currentlevel].shuffleMode();                                  // daarna laadt hij de huide level en shuffeld hij deze met de bovenstaande protype (shuffleMode)
         for (var i = 0; i < levels[currentlevel].length; i++) {               // hier kijkt hij naar hoeveel items in een array zit
             var element = document.createElement('div');
+            element.setAttribute('id', 'icon_' + i);
             element.addEventListener('click', (function(j){
                 return function(){
                     Flipicon(this,'' + levels[currentlevel][j])
                 };
             })(i));
-            output += '<div id="icon_' + i + '" onclick=""></div>'; // zodat hij weet hoeveel div hij moet maken met een unieke id en stopt het in de output
+            // output += '<div id="icon_' + i + '" onclick=""></div>'; // zodat hij weet hoeveel div hij moet maken met een unieke id en stopt het in de output
             document.getElementById('canvas').appendChild(element);
         }
         matchCount = 0;
