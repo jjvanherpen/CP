@@ -82,7 +82,7 @@ function initialize() {
     var icons_flipped = 0;
     var matchCount = 0;
     var highScores = [['naam', 20, 9]]
-    var levels = JSON.parse(localStorage.getItem('levels')) //haalt je levels op uit localstorage, moet dus uit die xml komen straks.
+    var levels = data;//haalt je levels op uit localstorage, moet dus uit die xml komen straks.
 
     if (localStorage.getItem("highScores") === null) {
         localStorage.setItem('highScores', JSON.stringify(highScores));
@@ -93,7 +93,7 @@ function initialize() {
 // prototype ---------------------------------
 
 // Voegt een functie toe aan de Array-class
-// Deze fuctie shuffled een array 
+// Deze fuctie shuffled een array
     Array.prototype.shuffleMode = function () {
         var i = this.length, j, temp;
         while (--i > 0) {
