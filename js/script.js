@@ -49,7 +49,7 @@ function unlock() {
 
 // variable  is gevuld met plaatjes icons1.png 1=val
 // 
-var icons;
+//var icons;
 // icons[0] = [1, 1, 2, 2, 3, 3, 4, 4];                                                          //level 1
 // icons[1] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6];                                                  //level 2
 // icons[2] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];                                          //level 3, enz
@@ -64,25 +64,26 @@ var icons;
 // 	[3,4,5]
 // ];
 
-$.getJSON('data.json', function(data){
+$.getJSON('js/data.json', function(data){
     console.log(data);
     console.log('first row, first column', data[0][0]);
     console.log('last row, last column', data[5][29]);
 
-    icons = data;
-    initialize();
+//    icons = data;
+    initialize(data);
 });
 
 
-function initialize() {
+function initialize(data) {
 
+//	var icons = data;
     var currentlevel = 0;
     var icon_value = [];
     var icon_ids = [];
     var icons_flipped = 0;
     var matchCount = 0;
     var highScores = [['naam', 20, 9]]
-    var levels = JSON.parse(localStorage.getItem('levels')) //haalt je levels op uit localstorage, moet dus uit die xml komen straks.
+    var levels = data; //haalt je levels op uit localstorage, moet dus uit die xml komen straks.
 
     if (localStorage.getItem("highScores") === null) {
         localStorage.setItem('highScores', JSON.stringify(highScores));
