@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald" />
+    <!--	<script src="js/script.js"></script>-->
+
+
+</head>
+<body>
+
+
+ 
+  <input type="submit" value="Submit"> 
+</form>
+	
+    <ul id="levels">
+        <a href="javascript:currentlevel=0; newBoard();">level 1</a>
+        <a href="javascript:currentlevel=1; newBoard();">level 2</a>
+        <a href="javascript:currentlevel=2; newBoard();">level 3</a>
+        <a href="javascript:currentlevel=3; newBoard();">level 5</a>
+        <a href="javascript:currentlevel=4; newBoard();">level 6</a>
+        <a href="javascript:currentlevel=5; newBoard();">level 7</a>
+    </ul>
+    <div id="highscores"></div>
+    <DIV ID="iphone">
+
+        <DIV ID="iphone_bg">
+            <div ID="status_bar"></div>
+            <DIV ID="iphone_lockscreen"></DIV>
+            <div id="canvas"></div>
+
+            <input type="range" class="slideToUnlock" value="0" max="100">
+        </DIV>
+
+        <DIV ID="reflectie"></DIV>
+		
+
+        <script src="js/script.js"></script>
+        <script>newBoard();</script>
+</body>
+</html>

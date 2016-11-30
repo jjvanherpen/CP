@@ -1,0 +1,191 @@
+body {
+    
+    background-color: #7ad6de;
+    width: 100%;
+    height: 100%;
+}
+
+a:link {
+    font-family: 'Oswald';
+	font-size: 30px;
+    text-decoration: none;
+    color: black;
+
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: red;
+}
+
+a:active {
+    text-decoration: none;
+} 
+
+
+div#canvas{
+	width: 388px;
+	height: 689px;
+	
+}
+
+div#canvas > div{
+	background: url(images/icons/icons0.png) no-repeat;
+    
+    width: 60px;
+    height: 60px;
+	float: left;
+	margin-top:   34px;
+    margin-left:  29px;
+    cursor:pointer;
+	text-align:center;
+      -webkit-animation: fadein 15s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 15s; /* Firefox < 16 */
+        -ms-animation: fadein 15s; /* Internet Explorer */
+         -o-animation: fadein 15s; /* Opera < 12.1 */
+            animation: fadein 15s;
+    
+}
+
+#iphone {
+    
+    background: url(images/Iphone.png);
+    height: 954px;
+    width: 489px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+    
+}
+
+#reflectie {
+    background: url(images/Reflection.png);
+    width: 240px;
+    height: 725px;
+    margin-left: 220px;
+    margin-top: 20px;
+    
+       
+}
+
+#iphone_bg {
+    
+    background: url(images/Background_iphone.png);
+    width: 388px;
+    height: 689px;
+    position: absolute;
+    left: 50%;
+    margin-left: -172px;
+    top: 110px;
+    
+    
+    }
+
+
+#iphone_lockscreen {
+    
+    background: url(images/Background_iphone.png);
+    width: 388px;
+    height: 689px;
+    position: absolute;
+
+    
+    
+    }
+
+
+h1 {
+	font-family: 'Oswald';
+	font-size: 12px;
+    color: white;
+	font-style: oblique;
+	font-variant: small-caps;
+	font-weight: bold;
+	line-height: 5.5px;
+    text-align: center;
+    
+}
+
+
+
+#status_bar {
+/*
+    background-color: black;
+    opacity: 0.;
+*/
+    width: 388px;
+    height: 21px;
+    position: absolute;
+       
+}
+
+#levels {
+    width: 100px;
+    height: 300px;     
+}
+
+/* css slider */
+
+
+input[type="range"] {
+    width: 320px;
+    margin: 100px;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#000), to(#1f1f1f));
+    -webkit-appearance: none;
+    border-radius: 10px;
+    padding: 5px;
+    transition: opacity 0.5s;
+    position: absolute;
+    left: 50%;
+    margin-left: -165px;
+    top: 500px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(top, #fafafa 0%,#dedede 50%,#cfcfcf 51%,#a3a3a3 100%);
+    z-index: 1;
+    width: 75px;
+    position: relative;
+    height: 50px;
+}
+
+input[type="range"]:before {
+    content: "slide to play";
+    color: #8a8a8a;
+    position: absolute;
+    left: 100px;
+    top: 10px;
+    z-index: 1;
+    font-size: 32px;
+}
+
+input[type="range"]::-webkit-slider-thumb:before {
+    color: #8a8a8a;
+    position: absolute;
+    left: 5px;
+    top: -10px;
+    z-index: 1;
+    font-size: 56px;
+    font-weight: bold;
+    content: "";
+}
+
+
+
+
+
+
+ 
+
+
+
