@@ -17,11 +17,11 @@ document.querySelector("input[type=\"range\"]").onmouseup = function () {
             }
         }, 1);
     }
-}
+};
 
 document.querySelector("input[type=\"range\"]").onmousedown = function () {
     clearInterval(document.init);
-}
+};
 
 function unlock() {
     document.querySelector("input[type=\"range\"]").style.display = 'none';
@@ -29,6 +29,26 @@ function unlock() {
 }
 
 // einde slider functie
+
+// prototype ---------------------------------
+
+// Voegt een functie toe aan de Array-class
+// Deze fuctie shuffled een array
+Array.prototype.shuffleMode = function () {
+    var i = this.length, j, temp;
+    while (--i > 0) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = this[j];
+        this[j] = this[i];
+        this[i] = temp;
+    }
+}
+
+Array.prototype.sortBySecondElement = function () {
+    this.sort(function (a, b) {
+        return a[1] - b[1]
+    })
+}
 
 
 //for(var i=0; I<levels[indexVanLevel].naamVanArray.length; i++){
@@ -64,17 +84,11 @@ function unlock() {
 // 	[3,4,5]
 // ];
 
-$.getJSON('js/data.json', function(data){
-    console.log(data);
-    console.log('first row, first column', data[0][0]);
-    console.log('last row, last column', data[5][29]);
-
-//    icons = data;
-    initialize(data);
-});
 
 
-function initialize(data) {
+
+
+function Game(data) {
 
 //	var icons = data;
     var currentlevel = 0;
@@ -82,7 +96,7 @@ function initialize(data) {
     var icon_ids = [];
     var icons_flipped = 0;
     var matchCount = 0;
-    var highScores = [['naam', 20, 9]]
+    var highScores = [['naam', 20, 9]];
     var levels = data; //haalt je levels op uit localstorage, moet dus uit die xml komen straks.
 
     if (localStorage.getItem("highScores") === null) {
@@ -91,81 +105,11 @@ function initialize(data) {
     }
 
 
-// prototype ---------------------------------
 
-// Voegt een functie toe aan de Array-class
-// Deze fuctie shuffled een array 
-    Array.prototype.shuffleMode = function () {
-        var i = this.length, j, temp;
-        while (--i > 0) {
-            j = Math.floor(Math.random() * (i + 1));
-            temp = this[j];
-            this[j] = this[i];
-            this[i] = temp;
-        }
-    }
-
-    Array.prototype.sortBySecondElement = function () {
-        this.sort(function (a, b) {
-            return a[1] - b[1]
-        })
-    }
 // prototype ---------------------------------
 
 
-    function newBoard() {            // hier wordt een nieuwe canvas(board) gecreeerd
-        icons_flipped = 0;         // met begint met 0 icons geflipt
-        var output = '';
-        levels[currentlevel].shuffleMode();                                  // daarna laadt hij de huide level en shuffeld hij deze met de bovenstaande protype (shuffleMode)
-        for (var i = 0; i < levels[currentlevel].length; i++) {               // hier kijkt hij naar hoeveel items in een array zit
-            output += '<div id="icon_' + i + '" onclick="Flipicon(this,\'' + levels[currentlevel][i] + '\')"></div>'; // zodat hij weet hoeveel div hij moet maken met een unieke id en stopt het in de output
-        }
-        matchCount = 0;
-        document.getElementById('status_bar').innerHTML = '<h1>Start!</h1>';
-        document.getElementById('canvas').innerHTML = output; // gooit hij alles in de index.hmtl met de div naam canvas
-        showHighScores();
-    }
-
-
-    function showHighScores() {
-        getHighScores();
-        highscores.sortBySecondElement();
-        document.getElementById('highscores').innerHTML = getHighScoresHtml();
-    }
-
-    function getHighScores() {
-        highscores = JSON.parse(localStorage.getItem('highScores'));
-        return highscores;
-    }
-
-    function filterHighscores() {
-        var filteredHighscores = highscores.filter(
-            function (obj) {
-                return obj[2] == currentlevel;
-            });
-        highscores = filteredHighscores;
-        higscores = highscores.slice(0, 1);
-        return filteredHighscores;
-    }
-
-    function sendHighscoreToServer() {
-        var newHighScores = getHighScores()
-        newHighScores.push(["Michael", matchCount, currentlevel]);
-        localStorage.setItem('highScores', JSON.stringify(newHighScores));
-    }
-
-    function getHighScoresHtml() {
-        filterHighscores();
-        var output = '<h2>Level ' + (currentlevel + 1) + '</h2><h4>Highscores: </h4><ol>'
-        for (i = 0; i < highscores.length; i++) {
-            output += '<li>' + highscores[i][0] + ' ' + highscores[i][1] + '</li>'
-        }
-        //highscores.forEach(output += '<li>'+ this[0]+ ' ' + this[1] + ' ' + this[2] + '</li>');
-        output += "</ol>";
-        return output;
-    }
-
-    function Flipicon(icon, val) {
+    var Flipicon = function(icon, val) {
         if (icon.innerHTML == "" && icon_value.length < 2) {  // als html leeg is en icon val kleiner is dan 2 dan begint de funtie te lopen
             icon.innerHTML = '<img src="css/images/icons/icons' + val + '.png"/>'; // hier wordt de html opgemaakt met een plaatje val staat gelijk aan de nummer van het plaatje val(1) = icons(1).png
 
@@ -178,9 +122,70 @@ function initialize(data) {
                 checkIfMatch();
             }
         }
-    }
+    };
 
-    function checkIfMatch() {
+    this.newBoard = function(current) {            // hier wordt een nieuwe canvas(board) gecreeerd
+        currentlevel = current;
+        console.log(current);
+        icons_flipped = 0;         // met begint met 0 icons geflipt
+        var output = '';
+        levels[currentlevel].shuffleMode();                                  // daarna laadt hij de huide level en shuffeld hij deze met de bovenstaande protype (shuffleMode)
+        for (var i = 0; i < levels[currentlevel].length; i++) {               // hier kijkt hij naar hoeveel items in een array zit
+            var element = document.createElement('div');
+            element.addEventListener('click', (function(j){
+                return function(){
+                    Flipicon(this,'' + levels[currentlevel][j])
+                };
+            })(i));
+            output += '<div id="icon_' + i + '" onclick=""></div>'; // zodat hij weet hoeveel div hij moet maken met een unieke id en stopt het in de output
+            document.getElementById('canvas').appendChild(element);
+        }
+        matchCount = 0;
+        document.getElementById('status_bar').innerHTML = '<h1>Start!</h1>';
+         // gooit hij alles in de index.hmtl met de div naam canvas
+        this.showHighScores();
+    };
+
+
+    this.showHighScores = function(){
+        getHighScores();
+        highscores.sortBySecondElement();
+        document.getElementById('highscores').innerHTML = this.getHighScoresHtml();
+    };
+
+    var getHighScores = function() {
+        highscores = JSON.parse(localStorage.getItem('highScores'));
+        return highscores;
+    };
+
+    this.filterHighscores = function (){
+        var filteredHighscores = highscores.filter(
+            function (obj) {
+                return obj[2] == currentlevel;
+            });
+        highscores = filteredHighscores;
+        highscores = highscores.slice(0, 1);
+        return filteredHighscores;
+    };
+
+    var sendHighscoreToServer = function (){
+        var newHighScores = getHighScores();
+        newHighScores.push(["Michael", matchCount, currentlevel]);
+        localStorage.setItem('highScores', JSON.stringify(newHighScores));
+    };
+
+    this.getHighScoresHtml = function() {
+        this.filterHighscores();
+        var output = '<h2>Level ' + (currentlevel + 1) + '</h2><h4>Highscores: </h4><ol>';
+        for (var i = 0; i < highscores.length; i++) {
+            output += '<li>' + highscores[i][0] + ' ' + highscores[i][1] + '</li>'
+        }
+        //highscores.forEach(output += '<li>'+ this[0]+ ' ' + this[1] + ' ' + this[2] + '</li>');
+        output += "</ol>";
+        return output;
+    };
+
+    var checkIfMatch = function() {
         if (icon_value[0] == icon_value[1]) { // als iconen de zelfde value hebben dan bijven deze geflipt en wordt er + 2 bij de array icons_flipped gedaan
             icons_flipped += 2;    // een wordt de value en id array weer leeg gemaakt
 
@@ -195,7 +200,7 @@ function initialize(data) {
                     currentlevel = currentlevel + 1;
                 }
                 document.getElementById('canvas').innerHTML = "";
-                newBoard();
+                this.newBoard();
             }
         }
 
@@ -217,7 +222,39 @@ function initialize(data) {
             setTimeout(flipterug, 500);
 
         }
-    }
+    };
 
-    newBoard();
+    this.newBoard(0);
 }
+
+function populateLinks(game){
+    console.log(game);
+    // var links = [];
+    $('#level-0').on('click', function(){
+        game.newBoard(0);
+    });
+    $('#level-1').on('click', function(){
+        game.newBoard(1);
+    });
+    $('#level-2').on('click', function(){
+        game.newBoard(2);
+    });
+    $('#level-3').on('click', function(){
+        game.newBoard(3);
+    });
+    $('#level-4').on('click', function(){
+        game.newBoard(4);
+    });
+    $('#level-5').on('click', function(){
+        game.newBoard(5);
+    });
+}
+
+$.getJSON('js/data.json', function(data){
+    console.log(data);
+    // console.log('first row, first column', data[0][0]);
+    // console.log('last row, last column', data[5][29]);
+    var game = new Game(data);
+    // console.log('GAME', game);
+    populateLinks(game);
+});
