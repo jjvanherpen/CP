@@ -58,7 +58,7 @@ var levels = [];
 //icons[4] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12];
 //icons[5] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 14, 14, 15, 15];
 
-
+//slaat icons op in localStorage, moet straks uit een xml o.i.d. komen
 
 
 
@@ -68,7 +68,21 @@ var icon_ids = [];
 var icons_flipped = 0;
 var matchCount = 0;
 var highScores = [['naam', 20, 9]]
+//var levels = JSON.parse(localStorage.getItem('levels')) //haalt je levels op uit localstorage, moet dus uit die xml komen straks.
 
+	if (localStorage.getItem("highScores") === null) {
+	  localStorage.setItem('highScores', JSON.stringify(highScores));
+		console.log(localStorage.setItem("highScores"));
+	}
+//$.post( 'http://www.jjvanherpen.nl/cp/js/score.json' , highscoreJson, function() { console.log(“Written highscores!”)}, “json”);
+
+//$.getJSON('js/data.json', function(data){
+//    levels = data;
+//	newBoard();
+//	console.log(data);
+//    console.log('first row, first column', data[0][0]);
+//    console.log('last row, last column', data[5][28]);
+//});
 
 
 $.ajax({
@@ -84,7 +98,7 @@ $.ajax({
 	newBoard();
 	console.log(data);
     console.log('first row, first column', data[0][0]);
-    console.log('last row, last column', data[5][28]);
+    console.log('last row, last column', data[5][27]);
 });
 // prototype ---------------------------------
 
@@ -129,13 +143,9 @@ function showHighScores() {
 }
 
 function getHighScores(){
-	highscores = $.get( 'http://www.jjvanherpen.nl/cp/js/score.json' , highScores, function() { console.log("Written highscores!")}, "json");
+	highscores = JSON.parse(localStorage.getItem('highScores'));
 	return highscores;
 }
-
-
-
-
 
 function filterHighscores(){
 	var filteredHighscores = highscores.filter(

@@ -1,9 +1,8 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald" />
     <!--	<script src="js/script.js"></script>-->
 
@@ -11,23 +10,18 @@
 </head>
 <body>
 
+
+ 
   <input type="submit" value="Submit"> 
 </form>
 	
     <ul id="levels">
-        <!--<a href="javascript:currentlevel=0; newBoard();">level 1</a>-->
-        <!--<a href="javascript:currentlevel=1; newBoard();">level 2</a>-->
-        <!--<a href="javascript:currentlevel=2; newBoard();">level 3</a>-->
-        <!--<a href="javascript:currentlevel=3; newBoard();">level 5</a>-->
-        <!--<a href="javascript:currentlevel=4; newBoard();">level 6</a>-->
-        <!--<a href="javascript:currentlevel=5; newBoard();">level 7</a>-->
-
-        <li><a id="level-0" class="levelLink">Level 1</a></li>
-        <li><a id="level-1" class="levelLink">Level 2</a></li>
-        <li><a id="level-2" class="levelLink">Level 3</a></li>
-        <li><a id="level-3" class="levelLink">Level 4</a></li>
-        <li><a id="level-4" class="levelLink">Level 5</a></li>
-        <li><a id="level-5" class="levelLink">Level 6</a></li>
+        <a href="javascript:currentlevel=0; newBoard();">level 1</a>
+        <a href="javascript:currentlevel=1; newBoard();">level 2</a>
+        <a href="javascript:currentlevel=2; newBoard();">level 3</a>
+        <a href="javascript:currentlevel=3; newBoard();">level 5</a>
+        <a href="javascript:currentlevel=4; newBoard();">level 6</a>
+        <a href="javascript:currentlevel=5; newBoard();">level 7</a>
     </ul>
     <div id="highscores"></div>
     <DIV ID="iphone">
@@ -44,6 +38,23 @@
 		
 
         <script src="js/script.js"></script>
-<!--        <script>newBoard();</script>-->
+        <script>newBoard();</script>
+		<script type='text/javascript'>
+
+(function()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem( 'firstLoad' ) )
+    {
+      localStorage[ 'firstLoad' ] = true;
+      window.location.reload();
+    }  
+    else
+      localStorage.removeItem( 'firstLoad' );
+  }
+})();
+
+</script>
 </body>
 </html>
